@@ -1,0 +1,25 @@
+version: '3'
+services:
+  # The postgres database.
+  db:
+    image: mysql:8.0
+    container_name: xbqlmz-mysql
+    restart: always
+    ports:
+      - "3306:3306"
+    command: mysqld --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci --sql_mode=""
+    environment:
+      - MYSQL_ROOT_PASSWORD=root
+      - MYSQL_DATABASE=xbqlmz
+      - MYSQL_ROOT_HOST=%
+    volumes:
+      - ./volumes/db/data:/docker-entrypoint-initdb.d
+
+  redis:
+    image: redis:6-alpine
+    restart: always
+    volumes:
+      - ./volumes/redis/data:/data
+    command: redis-server --requirepass xbqlmz123456
+    ports:
+      - "6379:6379"
