@@ -1,10 +1,11 @@
-HELP.md
+README.md
 .gradle
 build/
 !gradle/wrapper/gradle-wrapper.jar
 !**/src/main/**/build/
 !**/src/test/**/build/
 docker/volumes
+src/main/resources/application-*.yaml
 ### STS ###
 .apt_generated
 .classpath
