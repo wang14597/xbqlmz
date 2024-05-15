@@ -29,6 +29,8 @@ jobs:
             ${{ runner.os }}-gradle-
 
       - name: Run tests with Gradle
+        env:
+          SPRING_PROFILES_ACTIVE: test
         run: ./gradlew test --no-daemon
 
       - name: Check code style
