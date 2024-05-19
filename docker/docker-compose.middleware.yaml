@@ -1,19 +1,42 @@
 version: '3'
 services:
-  # The postgres database.
-  db:
+  db-master:
     image: mysql:8.0
-    container_name: xbqlmz-mysql
+    container_name: xbqlmz-mysql-master
     restart: always
     ports:
       - "3306:3306"
-    command: mysqld --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci --sql_mode=""
     environment:
       - MYSQL_ROOT_PASSWORD=root
       - MYSQL_DATABASE=xbqlmz
       - MYSQL_ROOT_HOST=%
     volumes:
-      - ./volumes/db/data:/docker-entrypoint-initdb.d
+      - ./volumes/db-master/data:/var/lib/mysql
+      - ./db_master/init:/docker-entrypoint-initdb.d
+      - ./db_master/my.cnf:/etc/mysql/my.cnf
+    networks:
+      - mysql_cluster
+    command: ["--init-file=/docker-entrypoint-initdb.d/01-init-master.sql"]
+
+  db-slave:
+    image: mysql:8.0
+    container_name: xbqlmz-mysql-slave
+    restart: always
+    ports:
+      - "3307:3306"
+    environment:
+      - MYSQL_ROOT_PASSWORD=root
+      - MYSQL_DATABASE=xbqlmz
+      - MYSQL_ROOT_HOST=%
+    volumes:
+      - ./volumes/db-salve/data:/var/lib/mysql
+      - ./db_salve/init:/docker-entrypoint-initdb.d
+      - ./db_salve/my.cnf:/etc/mysql/my.cnf
+    depends_on:
+      - db-master
+    networks:
+      - mysql_cluster
+
 
   redis:
     image: redis:6-alpine
@@ -23,3 +46,7 @@ services:
     command: redis-server --requirepass xbqlmz123456
     ports:
       - "6379:6379"
+
+networks:
+  mysql_cluster:
+    driver: bridge
