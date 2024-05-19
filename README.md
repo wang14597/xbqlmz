@@ -36,6 +36,7 @@ These additional references should also help you:
 cd docker
 docker-compose -f docker-compose.middleware.yaml -p xbqlmz up -d
 ```
+this step will create master-salve mysql database and redis
 
 #### step2:
 
@@ -51,5 +52,11 @@ spring:
   flyway:
     enabled: true
     locations: classpath:db/migration
+  datasources:
+    slave:
+      url: jdbc:mysql://localhost:3307/xbqlmz
+      username: root
+      password: root
+      driver-class-name: com.mysql.cj.jdbc.Driver
 ```
 Then run project.
