@@ -6,37 +6,15 @@
 <module name="Checker">
 
     <module name="SuppressWarningsFilter"/>
-
-
     <module name="Translation"/>
-
-    <!-- We have many existing long files, this check ends up being spurious -->
-    <!--<module name="FileLength">-->
     <module name="FileTabCharacter"/>
-
-    <!-- Checks for line length violations.                                 -->
-    <!-- See https://checkstyle.sourceforge.io/config_sizes.html#LineLength -->
     <module name="LineLength">
         <property name="max" value="150"/>
     </module>
-
     <module name="TreeWalker">
-
         <module name="SuppressWarningsHolder"/>
         <module name="SuppressionCommentFilter"/>
         <module name="SuppressWithNearbyCommentFilter"/>
-
-
-        <!-- Checks for Javadoc comments.                     -->
-        <!-- See http://checkstyle.sf.net/config_javadoc.html -->
-        <module name="JavadocType">
-            <property name="scope" value="public"/>
-            <property name="allowMissingParamTags" value="true"/>
-        </module>
-        <module name="JavadocStyle"/>
-
-        <!-- Checks for Naming Conventions.                  -->
-        <!-- See http://checkstyle.sf.net/config_naming.html -->
         <module name="ConstantName"/>
         <module name="LocalFinalVariableName"/>
         <module name="LocalVariableName"/>
@@ -46,26 +24,14 @@
         <module name="ParameterName"/>
         <module name="StaticVariableName"/>
         <module name="TypeName"/>
-
-
         <module name="IllegalImport">
             <property name="regexp" value="true"/>
             <property name="illegalPkgs" value="sun"/>
         </module>
-        <module name="RedundantImport"/>
-        <module name="UnusedImports"/>
-
-
-        <!-- Checks for Size Violations.                    -->
-        <!-- See http://checkstyle.sf.net/config_sizes.html -->
         <module name="MethodLength"/>
         <module name="ParameterNumber">
             <property name="ignoreOverriddenMethods" value="true"/>
         </module>
-
-
-        <!-- Checks for whitespace                               -->
-        <!-- See http://checkstyle.sf.net/config_whitespace.html -->
         <module name="EmptyForIteratorPad"/>
         <module name="MethodParamPad"/>
         <module name="NoWhitespaceAfter"/>
@@ -75,17 +41,7 @@
         <module name="WhitespaceAfter">
             <property name="tokens" value="COMMA, SEMI"/>
         </module>
-
-
-        <!-- Modifier Checks                                    -->
-        <!-- See http://checkstyle.sf.net/config_modifiers.html -->
-        <!-- This one is nitty, disable -->
-        <!-- <module name="ModifierOrder"/> -->
         <module name="RedundantModifier"/>
-
-
-        <!-- Checks for blocks. You know, those {}'s         -->
-        <!-- See http://checkstyle.sf.net/config_blocks.html -->
         <module name="AvoidNestedBlocks">
             <property name="allowInSwitchCase" value="true"/>
         </module>
@@ -93,11 +49,6 @@
         <module name="LeftCurly"/>
         <module name="NeedBraces"/>
         <module name="RightCurly"/>
-
-
-        <!-- Checks for common coding problems               -->
-        <!-- See http://checkstyle.sf.net/config_coding.html -->
-        <!-- module name="AvoidInlineConditionals"/-->
         <module name="EmptyStatement"/>
         <module name="EqualsHashCode"/>
         <module name="HiddenField">
@@ -109,16 +60,39 @@
         <module name="MissingSwitchDefault"/>
         <module name="SimplifyBooleanExpression"/>
         <module name="SimplifyBooleanReturn"/>
-
-        <!-- Checks for class design                         -->
-        <!-- See http://checkstyle.sf.net/config_design.html -->
         <module name="FinalClass"/>
         <module name="InterfaceIsType"/>
         <module name="VisibilityModifier"/>
-
-        <!--<module name="TodoComment"/>-->
         <module name="UpperEll"/>
 
-    </module>
+        <!-- Imports -->
+        <module name="AvoidStarImport"/>
+        <module name="UnusedImports"/>
+        <module name="RedundantImport"/>
+<!--        <module name="ImportOrder">-->
+<!--            <property name="ordered" value="true"/>-->
+<!--            <property name="groups" value="java, javax, org, com"/>-->
+<!--            <property name="separated" value="true"/>-->
+<!--        </module>-->
 
+        <!-- Class Design -->
+        <module name="DesignForExtension"/>
+        <module name="HideUtilityClassConstructor"/>
+        <module name="OneTopLevelClass"/>
+        <module name="ThrowsCount"/>
+
+        <!-- Miscellaneous -->
+        <module name="AnnotationUseStyle"/>
+        <module name="AvoidInlineConditionals"/>
+        <module name="BooleanExpressionComplexity">
+            <property name="max" value="3"/>
+        </module>
+        <module name="ClassDataAbstractionCoupling"/>
+        <module name="ClassFanOutComplexity"/>
+        <module name="CyclomaticComplexity"/>
+        <module name="NestedIfDepth"/>
+        <module name="ReturnCount"/>
+        <module name="MethodCount"/>
+
+    </module>
 </module>
