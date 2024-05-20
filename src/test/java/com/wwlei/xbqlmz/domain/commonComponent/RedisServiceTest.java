@@ -9,6 +9,7 @@ import org.mockito.MockitoAnnotations;
 import redis.clients.jedis.Jedis;
 import redis.clients.jedis.JedisPool;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -36,6 +37,17 @@ public final class RedisServiceTest {
         Object result = redisService.readFromRedis(key, Object.class);
 
         assertNull(result);
+        verify(jedis).get(key);
+    }
+
+    @Test
+    void readFromRedisReturnsValueWhenKeyExist() {
+        String key = "existingKey";
+        when(jedis.get(key)).thenReturn("existingKey");
+
+        Object result = redisService.readFromRedis(key, String.class);
+
+        assertEquals(result, key);
         verify(jedis).get(key);
     }
 }

@@ -22,7 +22,11 @@ public final class RedisServiceImp implements RedisService {
         redis.execute(jedis -> {
             String text = jedis.get(key);
             if (nonNull(text)) {
-                holder.value= JSON.parseObject(text, clazz);
+                if (clazz.equals(String.class)){
+                    holder.value= (T) text;
+                }else {
+                    holder.value= JSON.parseObject(text, clazz);
+                }
             }
         });
         return holder.value;
