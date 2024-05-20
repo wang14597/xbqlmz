@@ -36,6 +36,7 @@ dependencies {
     annotationProcessor 'org.projectlombok:lombok'
     implementation 'javax.validation:validation-api:2.0.1.Final'
     implementation 'redis.clients:jedis'
+    implementation 'com.alibaba.fastjson2:fastjson2:2.0.26'
 
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
     testImplementation 'com.h2database:h2'
