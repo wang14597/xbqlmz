@@ -6,7 +6,6 @@ public interface RedisService {
 
     <T> T readFromRedis(String key, Class<T> clazz);
 
-    <T> List<T> readListFromRedis(String key, Class<T> clazz);
 
     <T> void writeToRedis(String key, T model);
 
@@ -17,8 +16,6 @@ public interface RedisService {
     Boolean exists(String key);
 
     void delete(String key);
-
-    void batchWriteHashToRedis(String... var1);
 
     void deleteKeys(String... var1);
 }
