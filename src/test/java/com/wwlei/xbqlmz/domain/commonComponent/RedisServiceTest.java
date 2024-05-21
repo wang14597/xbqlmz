@@ -17,6 +17,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 
 public final class RedisServiceTest {
@@ -148,5 +149,25 @@ public final class RedisServiceTest {
 
         assertEquals(false, result);
     }
-}
 
+
+    @Test
+    public void testDelete() {
+        String key = "testKey";
+        when(jedis.del(key)).thenReturn(1L);
+
+        redisService.delete(key);
+
+        verify(jedis).del(key);
+    }
+
+    @Test
+    public void testDeleteKeys() {
+        String[] keys = {"key1", "key2", "key3"};
+        when(jedis.del(keys)).thenReturn(3L);
+
+        redisService.deleteKeys(keys);
+
+        verify(jedis, times(1)).del(keys);
+    }
+}

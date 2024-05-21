@@ -84,11 +84,11 @@ public final class RedisServiceImp implements RedisService {
 
     @Override
     public void delete(String key) {
-
+        redis.execute(jedis -> jedis.del(key));
     }
 
     @Override
-    public void deleteKeys(String... var1) {
-
+    public void deleteKeys(String... keys) {
+        redis.execute(jedis -> jedis.del(keys));
     }
 }

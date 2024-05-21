@@ -29,6 +29,11 @@ These additional references should also help you:
 * [Gradle Build Scans – insights for your project's build](https://scans.gradle.com#gradle)
 
 ### Development
+#### step0:
+
+```shell
+sh setup.sh
+```
 
 #### step1:
 
@@ -45,7 +50,7 @@ add `application-dev.yaml` in `src/main/resources` such like follow:
 ```yaml
 spring:
   datasource:
-    url: jdbc:mysql://localhost:3306/xbqlmz
+    url: jdbc:mysql://localhost:3306/xbqlmz  # 这里配置主数据库
     username: root
     password: root
     driver-class-name: com.mysql.cj.jdbc.Driver
@@ -54,9 +59,20 @@ spring:
     locations: classpath:db/migration
   datasources:
     slave:
-      url: jdbc:mysql://localhost:3307/xbqlmz
+      url: jdbc:mysql://localhost:3307/xbqlmz  # 这里配置从数据库
       username: root
       password: root
       driver-class-name: com.mysql.cj.jdbc.Driver
+
+redis:
+  host: localhost
+  port: 6379
+  password: xbqlmz123456
+  timeout: 3
+  poolMaxTotal: 10
+  poolMaxIdle: 10
+  poolMaxWait: 3
+  database: 0
+
 ```
 Then run project.
