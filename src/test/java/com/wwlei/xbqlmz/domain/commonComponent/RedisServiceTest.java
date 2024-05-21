@@ -1,8 +1,8 @@
 package com.wwlei.xbqlmz.domain.commonComponent;
 
 import com.alibaba.fastjson2.JSON;
-import com.wwlei.xbqlmz.domain.commonComponent.config.redis.RedisPool;
-import com.wwlei.xbqlmz.domain.commonComponent.service.RedisServiceImp;
+import com.wwlei.xbqlmz.domain.component.config.redis.RedisPool;
+import com.wwlei.xbqlmz.domain.component.service.RedisServiceImp;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mock;

@@ -1,4 +1,4 @@
-package com.wwlei.xbqlmz.domain.commonComponent.config.redis;
+package com.wwlei.xbqlmz.domain.component.config.redis;
 
 import lombok.Data;
 import org.springframework.lang.Nullable;

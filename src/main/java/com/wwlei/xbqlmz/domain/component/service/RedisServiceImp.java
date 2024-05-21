@@ -1,8 +1,8 @@
-package com.wwlei.xbqlmz.domain.commonComponent.service;
+package com.wwlei.xbqlmz.domain.component.service;
 
 import com.alibaba.fastjson2.JSON;
-import com.wwlei.xbqlmz.domain.commonComponent.config.redis.RedisPool;
-import com.wwlei.xbqlmz.domain.commonComponent.service.Interface.RedisService;
+import com.wwlei.xbqlmz.domain.component.config.redis.RedisPool;
+import com.wwlei.xbqlmz.domain.component.service.Interface.RedisService;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

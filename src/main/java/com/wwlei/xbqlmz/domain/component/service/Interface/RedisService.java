@@ -1,4 +1,4 @@
-package com.wwlei.xbqlmz.domain.commonComponent.service.Interface;
+package com.wwlei.xbqlmz.domain.component.service.Interface;
 
 import java.util.List;
 
