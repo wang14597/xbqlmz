@@ -59,13 +59,18 @@ public final class RedisServiceImp implements RedisService {
     }
 
     @Override
-    public <T> List<T> batchReadFromRedis(String... keys) {
-        return null;
+    public List<String> batchReadFromRedis(String... keys) {
+        return (List<String>) redis.executeWithCallback(jedis -> jedis.mget(keys));
     }
 
     @Override
-    public void batchWriteToRedis(String... var1) {
-
+    public void batchWriteToRedis(String... kvs) {
+        redis.execute(jedis -> {
+            String result = jedis.mset(kvs);
+            if (!"OK".equals(result)) {
+                log.error("redis mset error");
+            }
+        });
     }
 
     @Override

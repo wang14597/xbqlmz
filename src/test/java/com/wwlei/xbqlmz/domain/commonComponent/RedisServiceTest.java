@@ -10,11 +10,14 @@ import org.mockito.MockitoAnnotations;
 import redis.clients.jedis.Jedis;
 import redis.clients.jedis.JedisPool;
 
+import java.util.Arrays;
+import java.util.List;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.mockito.ArgumentMatchers.eq;
-import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.verify;
 
 public final class RedisServiceTest {
     private RedisServiceImp redisService;
@@ -89,6 +92,41 @@ public final class RedisServiceTest {
         redisService.writeToRedis(key, value);
 
         verify(jedis).set(eq(key), eq(JSON.toJSONString(value)), eq(RedisServiceImp.PARAMS));
+    }
+
+    @Test
+    public void testBatchReadFromRedis() {
+        // Arrange
+        String[] keys = {"key1", "key2", "key3"};
+        String value1 = "value1";
+        String value2 = "value2";
+        String value3 = "value3";
+        List<String> expectedValues = Arrays.asList(value1, value2, value3);
+        when(jedis.mget(keys)).thenReturn(Arrays.asList(value1, value2, value3));
+
+        List<String> actualValues = redisService.batchReadFromRedis(keys);
+
+        assertEquals(expectedValues, actualValues);
+    }
+
+    @Test
+    public void testBatchWriteToRedis() {
+        String[] kvs = {"key1", "value1", "key2", "value2"};
+        when(jedis.mset(kvs)).thenReturn("OK");
+
+        redisService.batchWriteToRedis(kvs);
+
+        verify(jedis).mset(kvs);
+    }
+
+    @Test
+    public void testBatchWriteToRedisWithError() {
+        String[] kvs = {"key1", "value1", "key2", "value2"};
+        when(jedis.mset(kvs)).thenReturn("ERROR");
+
+        redisService.batchWriteToRedis(kvs);
+
+        verify(jedis).mset(kvs);
     }
 }
 

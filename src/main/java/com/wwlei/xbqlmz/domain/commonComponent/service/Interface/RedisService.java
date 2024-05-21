@@ -9,7 +9,7 @@ public interface RedisService {
 
     <T> void writeToRedis(String key, T model);
 
-    <T> List<T> batchReadFromRedis(String... keys);
+    List<String> batchReadFromRedis(String... keys);
 
     void batchWriteToRedis(String... var1);
 
