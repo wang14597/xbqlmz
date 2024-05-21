@@ -75,7 +75,11 @@ public final class RedisServiceImp implements RedisService {
 
     @Override
     public Boolean exists(String key) {
-        return null;
+        Holder<Boolean> holder = new Holder<>(false);
+        redis.execute(jedis -> {
+            holder.value = jedis.exists(key);
+        });
+        return holder.value;
     }
 
     @Override

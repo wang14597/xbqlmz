@@ -128,5 +128,25 @@ public final class RedisServiceTest {
 
         verify(jedis).mset(kvs);
     }
+
+    @Test
+    public void testExistsKeyExists() {
+        String key = "testKey";
+        when(jedis.exists(key)).thenReturn(true);
+
+        Boolean result = redisService.exists(key);
+
+        assertEquals(true, result);
+    }
+
+    @Test
+    public void testExistsKeyNotExists() {
+        String key = "nonExistentKey";
+        when(jedis.exists(key)).thenReturn(false);
+
+        Boolean result = redisService.exists(key);
+
+        assertEquals(false, result);
+    }
 }
 
