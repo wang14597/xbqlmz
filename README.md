@@ -4,6 +4,83 @@
 
 [架构图.drawio](doc%2F%BC%DC%B9%B9%CD%BC.drawio)
 
+
+#### project struct
+```
+xbqlmz/
+│
+├── build.gradle
+├── settings.gradle
+│
+├── auth-service/
+│   ├── build.gradle
+│   ├── src/
+│       ├── main/
+│       │   ├── java/
+│       │   │   └── com/
+│       │   │       └── xbqlmz/
+│       │   │           └── auth/
+│       │   │               └── AuthServiceApplication.java
+│       │   └── resources/
+│       │       ├── application.yml
+│       │       └── static/
+│       └── test/
+│           ├── java/
+│           └── resources/
+│
+├── service-a/
+│   ├── build.gradle
+│   ├── src/
+│       ├── main/
+│       │   ├── java/
+│       │   │   └── com/
+│       │   │       └── xbqlmz/
+│       │   │           └── servicea/
+│       │   │               └── ServiceAApplication.java
+│       │   └── resources/
+│       │       ├── application.yml
+│       │       └── static/
+│       └── test/
+│           ├── java/
+│           └── resources/
+│
+├── service-b/
+│   ├── build.gradle
+│   ├── src/
+│       ├── main/
+│       │   ├── java/
+│       │   │   └── com/
+│       │   │       └── xbqlmz/
+│       │   │           └── serviceb/
+│       │   │               └── ServiceBApplication.java
+│       │   └── resources/
+│       │       ├── application.yml
+│       │       └── static/
+│       └── test/
+│           ├── java/
+│           └── resources/
+│
+└── gateway/
+    ├── build.gradle
+    ├── src/
+        ├── main/
+        │   ├── java/
+        │   │   └── com/
+        │   │       └── xbqlmz/
+        │   │           └── gateway/
+        │   │               ├── GatewayApplication.java
+        │   │               ├── config/
+        │   │               ├── filter/
+        │   │               └── route/
+        │   └── resources/
+        │       ├── application.yml
+        │       └── static/
+        └── test/
+            ├── java/
+            └── resources/
+
+```
+
 ### Development
 #### step0:
 
