@@ -1,3 +1,9 @@
+### System architecture diagram
+
+![img.png](doc%2Fimg.png)
+
+[架构图.drawio](doc%2F%BC%DC%B9%B9%CD%BC.drawio)
+
 ### Development
 #### step0:
 
