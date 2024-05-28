@@ -17,7 +17,7 @@ public class RedisServiceTests {
     private RedisService redisService;
 
     @Test
-    public void TestRedisWriteAndRead() {
+    public void testRedisWriteAndRead() {
         redisService.writeToRedis("test1", "value1");
         String string = redisService.readFromRedis("test1", String.class);
         Assertions.assertEquals("value1", string);
@@ -27,13 +27,13 @@ public class RedisServiceTests {
     }
 
     @Test
-    public void TestRedisBatchWriteAndRead() {
-        redisService.batchWriteToRedis("test1", "value1","test2", "value2");
+    public void testRedisBatchWriteAndRead() {
+        redisService.batchWriteToRedis("test1", "value1", "test2", "value2");
         List<String> strings = redisService.batchReadFromRedis("test1", "test2");
-        Assertions.assertArrayEquals(List.of("value1","value2").toArray(), strings.toArray());
-        redisService.deleteKeys("test1","test2");
+        Assertions.assertArrayEquals(List.of("value1", "value2").toArray(), strings.toArray());
+        redisService.deleteKeys("test1", "test2");
         List<String> stringsDeleted = redisService.batchReadFromRedis("test1", "test2");
-        for (String string:stringsDeleted) {
+        for (String string : stringsDeleted) {
             Assertions.assertNull(string);
         }
     }
