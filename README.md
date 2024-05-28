@@ -96,9 +96,9 @@ docker-compose -f docker-compose.middleware.yaml -p xbqlmz up -d
 ```
 this step will create master-salve mysql database and redis
 
-#### step2:
+#### step2 configure auth-service:
 
-add `application-dev.yaml` in `src/main/resources` such like follow:
+add `application-dev.yaml` in `/auth-service/src/main/resources` such like follow:
 
 ```yaml
 spring:
