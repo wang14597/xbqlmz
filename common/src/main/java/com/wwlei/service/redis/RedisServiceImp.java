@@ -1,12 +1,8 @@
-package com.wwlei.xbqlmz.domain.component.service;
+package com.wwlei.service.redis;
 
 import com.alibaba.fastjson2.JSON;
-import com.wwlei.xbqlmz.domain.component.config.redis.RedisPool;
-import com.wwlei.xbqlmz.domain.component.service.Interface.RedisService;
 import lombok.Getter;
-import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.stereotype.Service;
 import redis.clients.jedis.params.SetParams;
 
 import javax.xml.ws.Holder;
@@ -15,8 +11,6 @@ import java.util.List;
 import static java.util.Objects.nonNull;
 
 @Slf4j
-@Service
-@RequiredArgsConstructor
 @Getter
 public final class RedisServiceImp implements RedisService {
 
@@ -24,6 +18,10 @@ public final class RedisServiceImp implements RedisService {
 
     private static final int MAX_REDIS_CACHE_TIME = 5 * 60;
     public static final SetParams PARAMS = new SetParams().ex(MAX_REDIS_CACHE_TIME);
+
+    public RedisServiceImp(RedisPool redis) {
+        this.redis = redis;
+    }
 
     @Override
     public <T> T readFromRedis(String key, Class<T> clazz) {

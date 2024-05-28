@@ -1,7 +1,6 @@
 plugins {
-    id 'org.springframework.boot' version '2.6.13'
-    id 'io.spring.dependency-management' version '1.0.15.RELEASE'
     id 'java'
+    id 'io.spring.dependency-management' version '1.0.15.RELEASE' apply false
     id 'checkstyle'
 }
 
@@ -14,46 +13,28 @@ java {
     }
 }
 
-configurations {
-    compileOnly {
-        extendsFrom annotationProcessor
-    }
-}
-
 repositories {
     mavenCentral()
 }
 
-dependencies {
-    implementation 'org.springframework.boot:spring-boot-starter-web'
-    implementation 'org.springframework.boot:spring-boot-starter-web-services'
-    implementation 'org.mybatis.spring.boot:mybatis-spring-boot-starter:2.2.2'
-    implementation 'org.springframework.session:spring-session-core'
-    implementation 'org.flywaydb:flyway-core:6.5.7'
-    implementation 'mysql:mysql-connector-java'
-    implementation 'org.springframework.boot:spring-boot-starter-jdbc'
-    compileOnly 'org.projectlombok:lombok'
-    annotationProcessor 'org.projectlombok:lombok'
-    implementation 'javax.validation:validation-api:2.0.1.Final'
-    implementation 'redis.clients:jedis:5.0.0'
-    implementation 'com.alibaba.fastjson2:fastjson2:2.0.26'
+subprojects {
+    apply plugin: 'java'
+    apply plugin: 'checkstyle'
+    apply plugin: 'io.spring.dependency-management'
 
-    testImplementation 'org.springframework.boot:spring-boot-starter-test'
-    testImplementation 'com.h2database:h2'
-}
+    repositories {
+        mavenCentral()
+    }
 
-tasks.named('test') {
-    useJUnitPlatform()
-}
+    checkstyle {
+        toolVersion = '8.36.2'
+        configFile = rootProject.file('.github/config/checkstyle/checkstyle.xml')
+    }
 
-checkstyle {
-    toolVersion = '8.36.2'
-    configFile = rootProject.file('.github/config/checkstyle/checkstyle.xml')
-}
-
-tasks.withType(Checkstyle).configureEach {
-    reports {
-        xml.required.set(false)
-        html.required.set(true)
+    tasks.withType(Checkstyle).configureEach {
+        reports {
+            xml.required.set(false)
+            html.required.set(true)
+        }
     }
 }

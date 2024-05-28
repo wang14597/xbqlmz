@@ -1,4 +1,4 @@
-package com.wwlei.xbqlmz.domain.component.config.redis;
+package com.wwlei.service.redis;
 
 import redis.clients.jedis.Jedis;
 

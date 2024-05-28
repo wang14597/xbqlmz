@@ -1,0 +1,28 @@
+plugins {
+    id 'java'
+}
+
+group = 'com.wwlei'
+version = '0.0.1-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation 'redis.clients:jedis:5.1.0'
+    implementation 'com.alibaba.fastjson2:fastjson2:2.0.26'
+    implementation 'jakarta.xml.ws:jakarta.xml.ws-api:2.3.3'
+    compileOnly 'org.projectlombok:lombok:1.18.32'
+    annotationProcessor 'org.projectlombok:lombok:1.18.32'
+
+    testCompileOnly 'org.projectlombok:lombok:1.18.32'
+    testAnnotationProcessor 'org.projectlombok:lombok:1.18.32'
+    testImplementation 'org.mockito:mockito-core:4.0.0'
+    testImplementation platform('org.junit:junit-bom:5.9.1')
+    testImplementation 'org.junit.jupiter:junit-jupiter'
+}
+
+tasks.named('test') {
+    useJUnitPlatform()
+}

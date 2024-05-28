@@ -1,19 +1,18 @@
-package com.wwlei.xbqlmz.domain.component.config.redis;
+package com.wwlei.service.redis;
 
-import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.stereotype.Service;
 import redis.clients.jedis.Jedis;
 import redis.clients.jedis.JedisPool;
 
 
-
 @Slf4j
-@Service
-@RequiredArgsConstructor
 public class RedisPool {
 
     private final JedisPool jedisPool;
+
+    public RedisPool(JedisPool jedisPool) {
+        this.jedisPool = jedisPool;
+    }
 
     /***
      * execute

@@ -1,8 +1,8 @@
-package com.wwlei.xbqlmz.domain.commonComponent;
+package service;
 
 import com.alibaba.fastjson2.JSON;
-import com.wwlei.xbqlmz.domain.component.config.redis.RedisPool;
-import com.wwlei.xbqlmz.domain.component.service.RedisServiceImp;
+import com.wwlei.service.redis.RedisPool;
+import com.wwlei.service.redis.RedisServiceImp;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
@@ -17,8 +17,8 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.when;
-import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.times;
 
 public final class RedisServiceTest {
     private RedisServiceImp redisService;

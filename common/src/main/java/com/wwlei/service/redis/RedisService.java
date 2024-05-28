@@ -1,4 +1,4 @@
-package com.wwlei.xbqlmz.domain.component.service.Interface;
+package com.wwlei.service.redis;
 
 import java.util.List;
 
