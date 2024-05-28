@@ -1,4 +1,4 @@
-package com.wwlei.service.redis;
+package com.wwlei.common.redis;
 
 import java.util.List;
 

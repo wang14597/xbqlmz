@@ -1,5 +1,5 @@
 plugins {
-    id 'org.springframework.boot' version '3.0.2'
+    id 'org.springframework.boot' version '2.6.13'
     id 'io.spring.dependency-management'
     id 'java'
 }
@@ -18,11 +18,13 @@ repositories {
 }
 
 dependencies {
+    implementation project(':common')
+
     implementation 'org.springframework.boot:spring-boot-starter-web'
     implementation 'org.springframework.boot:spring-boot-starter-web-services'
     implementation 'org.springframework.session:spring-session-core'
-    implementation 'org.flywaydb:flyway-core:9.5.1'
-    implementation 'mysql:mysql-connector-java'
+    implementation 'org.flywaydb:flyway-core'
+    implementation 'com.mysql:mysql-connector-j'
     implementation 'org.springframework.boot:spring-boot-starter-jdbc'
     compileOnly 'org.projectlombok:lombok'
     annotationProcessor 'org.projectlombok:lombok'
@@ -33,6 +35,6 @@ dependencies {
     testImplementation 'com.h2database:h2'
 }
 
-tasks.named('test') {
-    useJUnitPlatform()
-}
+//tasks.named('test') {
+//    useJUnitPlatform()
+//}

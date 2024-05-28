@@ -1,4 +1,4 @@
-package com.wwlei.config.redis;
+package com.wwlei.common.config.redis;
 
 import lombok.Getter;
 import lombok.Setter;

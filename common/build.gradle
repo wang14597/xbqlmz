@@ -9,6 +9,12 @@ repositories {
     mavenCentral()
 }
 
+java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(17)
+    }
+}
+
 dependencies {
     implementation 'redis.clients:jedis:5.1.0'
     implementation 'com.alibaba.fastjson2:fastjson2:2.0.26'

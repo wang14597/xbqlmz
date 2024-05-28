@@ -1,8 +1,8 @@
 package service;
 
 import com.alibaba.fastjson2.JSON;
-import com.wwlei.service.redis.RedisPool;
-import com.wwlei.service.redis.RedisServiceImp;
+import com.wwlei.common.redis.RedisPool;
+import com.wwlei.common.redis.RedisServiceImp;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
