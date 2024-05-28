@@ -10,17 +10,20 @@ jobs:
   build:
     runs-on: ubuntu-latest
 
-    services:
-      redis:
-        image: redis:6-alpine
-        ports:
-          - 6379:6379
-        options: >
-          --requirepass xbqlmz123456
-
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
+
+      - name: Start Redis
+        run: |
+          docker run -d --name redis -p 6379:6379 redis:6-alpine redis-server --requirepass xbqlmz123456
+
+      - name: Wait for Redis to be ready
+        run: |
+          until docker exec redis redis-cli -a xbqlmz123456 ping | grep -q PONG; do
+            echo "Waiting for Redis..."
+            sleep 1
+          done
 
       - name: Set up JDK 17
         uses: actions/setup-java@v3
@@ -46,3 +49,6 @@ jobs:
 
       - name: Build with Gradle
         run: ./gradlew build --no-daemon
+
+      - name: Stop Redis
+        run: docker stop redis
