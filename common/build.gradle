@@ -1,6 +1,6 @@
 plugins {
     id 'java'
-    id 'org.springframework.boot' version '2.6.13'
+//    id 'org.springframework.boot' version '2.6.13'
 }
 
 group = 'com.wwlei'
@@ -23,7 +23,7 @@ dependencies {
     compileOnly 'org.projectlombok:lombok:1.18.32'
     annotationProcessor 'org.projectlombok:lombok:1.18.32'
 
-    implementation 'org.springframework.boot:spring-boot-starter-web'
+    implementation 'org.springframework:spring-web:5.3.20'
 
     testCompileOnly 'org.projectlombok:lombok:1.18.32'
     testAnnotationProcessor 'org.projectlombok:lombok:1.18.32'
