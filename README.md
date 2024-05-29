@@ -4,8 +4,8 @@
 
 [架构图.drawio](doc%2F%BC%DC%B9%B9%CD%BC.drawio)
 
-
 #### project struct
+
 ```
 xbqlmz/
 │
@@ -81,7 +81,14 @@ xbqlmz/
 
 ```
 
+### module introduction：
+
+##### **common:** base supported module for project
+
+##### **auth-service:** auth and gateway service
+
 ### Development
+
 #### step0:
 
 ```shell
@@ -94,6 +101,7 @@ sh setup.sh
 cd docker
 docker-compose -f docker-compose.middleware.yaml -p xbqlmz up -d
 ```
+
 this step will create master-salve mysql database and redis
 
 #### step2 configure auth-service:
@@ -128,4 +136,5 @@ redis:
   database: 0
 
 ```
+
 Then run project.
