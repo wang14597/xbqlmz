@@ -1,2 +1,2 @@
 rootProject.name = 'XBQLMZ'
-include 'common', 'auth-service'
+include 'common', 'auth-service', 'gateway'
