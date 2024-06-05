@@ -36,6 +36,12 @@ public class UserAggregateRepo {
      * @return 保存后的用户对象。这个对象可能是新创建的，也可能是已存在的对象。
      */
     public User createUser(User user) {
+        if (user.getId() != null && userRepository.existsById(user.getId())) {
+            // update
+            return userRepository.save(user);
+        }
+        // insert
+        user.encryptPassword();
         return userRepository.save(user);
     }
 }
