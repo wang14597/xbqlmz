@@ -1,5 +1,5 @@
--- Create Users table
-CREATE TABLE Users
+-- Create users table
+CREATE TABLE users
 (
     id         BIGINT PRIMARY KEY AUTO_INCREMENT,
     username   VARCHAR(50)  NOT NULL UNIQUE,
@@ -10,48 +10,48 @@ CREATE TABLE Users
     updated_at TIMESTAMP             DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 );
 
--- Create Roles table
-CREATE TABLE Roles
+-- Create roles table
+CREATE TABLE roles
 (
     id          BIGINT PRIMARY KEY AUTO_INCREMENT,
     name        VARCHAR(50) NOT NULL UNIQUE,
     description VARCHAR(255)
 );
 
--- Create Permissions table
-CREATE TABLE Permissions
+-- Create permissions table
+CREATE TABLE permissions
 (
     id          BIGINT PRIMARY KEY AUTO_INCREMENT,
     name        VARCHAR(50) NOT NULL UNIQUE,
     description VARCHAR(255)
 );
 
--- Create UserRoles table
-CREATE TABLE UserRoles
+-- Create user_roles table
+CREATE TABLE user_roles
 (
     user_id BIGINT NOT NULL,
     role_id BIGINT NOT NULL,
     PRIMARY KEY (user_id, role_id),
-    FOREIGN KEY (user_id) REFERENCES Users (id) ON DELETE CASCADE,
-    FOREIGN KEY (role_id) REFERENCES Roles (id) ON DELETE CASCADE
+    FOREIGN KEY (user_id) REFERENCES users (id) ON DELETE CASCADE,
+    FOREIGN KEY (role_id) REFERENCES roles (id) ON DELETE CASCADE
 );
 
--- Create UserPermissions table
-CREATE TABLE UserPermissions
+-- Create user_permissions table
+CREATE TABLE user_permissions
 (
     user_id       BIGINT NOT NULL,
     permission_id BIGINT NOT NULL,
     PRIMARY KEY (user_id, permission_id),
-    FOREIGN KEY (user_id) REFERENCES Users (id) ON DELETE CASCADE,
-    FOREIGN KEY (permission_id) REFERENCES Permissions (id) ON DELETE CASCADE
+    FOREIGN KEY (user_id) REFERENCES users (id) ON DELETE CASCADE,
+    FOREIGN KEY (permission_id) REFERENCES permissions (id) ON DELETE CASCADE
 );
 
--- Create RolePermissions table
-CREATE TABLE RolePermissions
+-- Create role_permissions table
+CREATE TABLE role_permissions
 (
     role_id       BIGINT NOT NULL,
     permission_id BIGINT NOT NULL,
     PRIMARY KEY (role_id, permission_id),
-    FOREIGN KEY (role_id) REFERENCES Roles (id) ON DELETE CASCADE,
-    FOREIGN KEY (permission_id) REFERENCES Permissions (id) ON DELETE CASCADE
+    FOREIGN KEY (role_id) REFERENCES roles (id) ON DELETE CASCADE,
+    FOREIGN KEY (permission_id) REFERENCES permissions (id) ON DELETE CASCADE
 );
