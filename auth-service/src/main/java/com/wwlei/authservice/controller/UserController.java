@@ -21,13 +21,13 @@ public final class UserController {
     private final UserService userService;
 
     @GetMapping("/user/{id}")
-    public User findUserById(@PathVariable("id") Long id) {
-        return userService.getUserAggregate(id);
+    public ApiResponse<?> findUserById(@PathVariable("id") Long id) {
+        return ApiResponse.success(userService.getUserAggregate(id));
     }
 
     @PutMapping("/user")
-    public User createOrUpdateUser(@RequestBody User user) {
-        return userService.createUserAggregate(user);
+    public ApiResponse<?> createOrUpdateUser(@RequestBody User user) {
+        return ApiResponse.success(userService.createUserAggregate(user));
     }
 
     @PostMapping("/login")
