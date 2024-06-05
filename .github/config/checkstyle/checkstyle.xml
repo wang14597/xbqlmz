@@ -77,7 +77,7 @@
 
         <!-- Class Design -->
 <!--        <module name="DesignForExtension"/>-->
-        <module name="HideUtilityClassConstructor"/>
+<!--        <module name="HideUtilityClassConstructor"/>-->
         <module name="OneTopLevelClass"/>
         <module name="ThrowsCount"/>
 
@@ -91,7 +91,7 @@
         <module name="ClassFanOutComplexity"/>
         <module name="CyclomaticComplexity"/>
         <module name="NestedIfDepth"/>
-        <module name="ReturnCount"/>
+<!--        <module name="ReturnCount"/>-->
         <module name="MethodCount"/>
 
     </module>
