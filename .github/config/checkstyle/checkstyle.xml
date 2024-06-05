@@ -76,7 +76,7 @@
 <!--        </module>-->
 
         <!-- Class Design -->
-        <module name="DesignForExtension"/>
+<!--        <module name="DesignForExtension"/>-->
         <module name="HideUtilityClassConstructor"/>
         <module name="OneTopLevelClass"/>
         <module name="ThrowsCount"/>

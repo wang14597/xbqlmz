@@ -44,4 +44,9 @@ public class UserAggregateRepo {
         user.encryptPassword();
         return userRepository.save(user);
     }
+
+    public User findByUsername(String username) {
+        Optional<User> optionalUser = userRepository.findByUsername(username);
+        return optionalUser.orElseThrow(() ->new IllegalArgumentException("user not find"));
+    }
 }

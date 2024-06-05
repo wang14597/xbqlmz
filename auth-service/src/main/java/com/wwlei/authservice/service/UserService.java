@@ -2,9 +2,12 @@ package com.wwlei.authservice.service;
 
 import com.wwlei.authservice.repo.UserAggregateRepo;
 import com.wwlei.authservice.repo.model.User;
+import com.wwlei.common.utils.PasswordUtil;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.security.NoSuchAlgorithmException;
 
 @Service
 @AllArgsConstructor
@@ -36,5 +39,23 @@ public class UserService {
     @Transactional
     public User createUserAggregate(User user) {
         return userAggregateRepo.createUser(user);
+    }
+
+
+    /**
+     * 用户登录方法
+     * 通过验证用户输入的用户名和密码，来完成登录过程。如果用户名或密码不正确，将抛出异常。
+     *
+     * @param user 用户对象，包含待验证的用户名和密码
+     * @return 返回生成的JWT（JSON Web Token），用于用户身份验证
+     * @throws NoSuchAlgorithmException 如果密码验证过程中遇到未知的加密算法，将抛出此异常
+     */
+    public String login(User user) throws NoSuchAlgorithmException {
+        user.validate();
+        User userFromDb = userAggregateRepo.findByUsername(user.getUsername());
+        if (!PasswordUtil.verifyPassword(user.getPassword(), userFromDb.getPassword(), userFromDb.getSalt())){
+            throw new RuntimeException("密码错误");
+        }
+        return userFromDb.createJWT();
     }
 }
