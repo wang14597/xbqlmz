@@ -4,7 +4,6 @@ import com.wwlei.common.utils.JwtTokenProvider;
 import com.wwlei.common.utils.PasswordUtil;
 import lombok.Getter;
 import lombok.Setter;
-import org.springframework.util.StringUtils;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -76,13 +75,6 @@ public class User {
             throw new RuntimeException(e);
         }
     }
-
-    public void validate() {
-        if (StringUtils.isEmpty(this.getUsername()) || StringUtils.isEmpty(this.getPassword())) {
-            throw new RuntimeException("user name and password can not empty");
-        }
-    }
-
     public String createJWT() {
         StringBuilder roleStr = new StringBuilder();
         for (Role role : this.roles) {

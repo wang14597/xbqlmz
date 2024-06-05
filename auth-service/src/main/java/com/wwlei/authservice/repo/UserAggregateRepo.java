@@ -1,6 +1,6 @@
 package com.wwlei.authservice.repo;
 
-import com.wwlei.authservice.repo.jpaRepo.UserRepository;
+import com.wwlei.authservice.repo.jpa.UserRepository;
 import com.wwlei.authservice.repo.model.User;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Repository;

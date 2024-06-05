@@ -1,4 +1,4 @@
-package com.wwlei.authservice.repo.jpaRepo;
+package com.wwlei.authservice.repo.jpa;
 
 import com.wwlei.authservice.repo.model.Role;
 import org.springframework.data.jpa.repository.JpaRepository;

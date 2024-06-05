@@ -51,7 +51,6 @@ public class UserService {
      * @throws NoSuchAlgorithmException 如果密码验证过程中遇到未知的加密算法，将抛出此异常
      */
     public String login(User user) throws NoSuchAlgorithmException {
-        user.validate();
         User userFromDb = userAggregateRepo.findByUsername(user.getUsername());
         if (!PasswordUtil.verifyPassword(user.getPassword(), userFromDb.getPassword(), userFromDb.getSalt())){
             throw new RuntimeException("密码错误");
