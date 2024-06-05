@@ -26,6 +26,13 @@ subprojects {
         mavenCentral()
     }
 
+    dependencyManagement {
+        imports {
+            mavenBom "org.springframework.cloud:spring-cloud-dependencies:2021.0.5" // or another appropriate version
+        }
+    }
+
+
     checkstyle {
         toolVersion = '8.36.2'
         configFile = rootProject.file('.github/config/checkstyle/checkstyle.xml')
