@@ -84,4 +84,10 @@ public class User {
         roleStr.deleteCharAt(roleStr.length() - 1);
         return JwtTokenProvider.createToken(this.username, roleStr.toString());
     }
+
+    public void verifyPassword(User userFromDb) throws NoSuchAlgorithmException {
+        if (!PasswordUtil.verifyPassword(userFromDb.getPassword(), userFromDb.getPassword(), userFromDb.getSalt())){
+            throw new RuntimeException("密码错误");
+        }
+    }
 }
