@@ -2,7 +2,6 @@ package com.wwlei.authservice.service;
 
 import com.wwlei.authservice.repo.UserAggregateRepo;
 import com.wwlei.authservice.repo.model.User;
-import com.wwlei.common.utils.PasswordUtil;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -52,9 +51,7 @@ public class UserService {
      */
     public String login(User user) throws NoSuchAlgorithmException {
         User userFromDb = userAggregateRepo.findByUsername(user.getUsername());
-        if (!PasswordUtil.verifyPassword(user.getPassword(), userFromDb.getPassword(), userFromDb.getSalt())){
-            throw new RuntimeException("密码错误");
-        }
+        user.verifyPassword(userFromDb);
         return userFromDb.createJWT();
     }
 }
