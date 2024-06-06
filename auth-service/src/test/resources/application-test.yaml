@@ -8,7 +8,7 @@ spring:
     driver-class-name: org.h2.Driver
   flyway:
     enabled: true
-    locations: classpath:db/migration
+    locations: classpath:migration
 
 redis:
   host: localhost
