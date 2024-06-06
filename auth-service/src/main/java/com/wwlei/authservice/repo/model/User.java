@@ -86,7 +86,7 @@ public class User {
     }
 
     public void verifyPassword(User userFromDb) throws NoSuchAlgorithmException {
-        if (!PasswordUtil.verifyPassword(userFromDb.getPassword(), userFromDb.getPassword(), userFromDb.getSalt())){
+        if (!PasswordUtil.verifyPassword(this.getPassword(), userFromDb.getPassword(), userFromDb.getSalt())){
             throw new RuntimeException("密码错误");
         }
     }
