@@ -49,7 +49,7 @@ public class UserService {
      * @return 返回生成的JWT（JSON Web Token），用于用户身份验证
      * @throws NoSuchAlgorithmException 如果密码验证过程中遇到未知的加密算法，将抛出此异常
      */
-    public String login(User user) throws NoSuchAlgorithmException {
+    public String login(User user) throws NoSuchAlgorithmException, InterruptedException {
         User userFromDb = userAggregateRepo.findByUsername(user.getUsername());
         user.verifyPassword(userFromDb);
         return userFromDb.createJWT();
