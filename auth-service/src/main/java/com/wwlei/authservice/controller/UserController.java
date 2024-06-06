@@ -27,7 +27,7 @@ public final class UserController {
 
     @GetMapping("/user/{id}/permissions")
     public ApiResponse<?> findPermissionsByUserId(@PathVariable("id") Long id) throws InterruptedException {
-        return ApiResponse.success(userService.getUserAggregate(id).getAllPermissions());
+        return ApiResponse.success(userService.getUserAggregate(id).showAllPermissions());
     }
 
     @PutMapping("/user")

@@ -17,7 +17,9 @@ import org.springframework.web.server.WebFilter;
 import org.springframework.web.server.WebFilterChain;
 import reactor.core.publisher.Mono;
 
-import java.util.Collections;
+import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Component
 public class JwtTokenAuthenticationFilter implements WebFilter {
@@ -48,8 +50,10 @@ public class JwtTokenAuthenticationFilter implements WebFilter {
     public Mono<Authentication> getAuthentication(String token) {
         String username = JwtTokenProvider.getUsernameFromToken(token);
         String role = JwtTokenProvider.getRoleFromToken(token);
-        GrantedAuthority authority = new SimpleGrantedAuthority(role);
-        Authentication authentication = new UsernamePasswordAuthenticationToken(username, null, Collections.singleton(authority));
+        List<GrantedAuthority> authorities = Arrays.stream(role.split(","))
+                .map(SimpleGrantedAuthority::new)
+                .collect(Collectors.toList());
+        Authentication authentication = new UsernamePasswordAuthenticationToken(username, null, authorities);
         return Mono.just(authentication);
     }
 }

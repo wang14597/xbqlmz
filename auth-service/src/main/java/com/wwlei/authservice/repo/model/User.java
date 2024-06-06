@@ -79,11 +79,11 @@ public class User {
     }
 
     public String createJWT() throws InterruptedException {
-        String permissionsAll = getAllPermissions();
+        String permissionsAll = showAllPermissions();
         return JwtTokenProvider.createToken(this.username, permissionsAll);
     }
 
-    public String getAllPermissions() throws InterruptedException {
+    public String showAllPermissions() throws InterruptedException {
         CountDownLatch latch = new CountDownLatch(2);
         Set<String> rolePermissions = new HashSet<>();
         Set<String> userPermissions = new HashSet<>();
