@@ -25,13 +25,18 @@ public final class UserController {
         return ApiResponse.success(userService.getUserAggregate(id));
     }
 
+    @GetMapping("/user/{id}/permissions")
+    public ApiResponse<?> findPermissionsByUserId(@PathVariable("id") Long id) throws InterruptedException {
+        return ApiResponse.success(userService.getUserAggregate(id).getAllPermissions());
+    }
+
     @PutMapping("/user")
     public ApiResponse<?> createOrUpdateUser(@RequestBody User user) {
         return ApiResponse.success(userService.createUserAggregate(user));
     }
 
     @PostMapping("/login")
-    public ApiResponse<?> login(@RequestBody User user) throws NoSuchAlgorithmException {
+    public ApiResponse<?> login(@RequestBody User user) throws NoSuchAlgorithmException, InterruptedException {
         return ApiResponse.success(userService.login(user));
     }
 }

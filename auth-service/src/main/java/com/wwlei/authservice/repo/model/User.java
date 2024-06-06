@@ -16,7 +16,9 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 import java.security.NoSuchAlgorithmException;
+import java.util.HashSet;
 import java.util.Set;
+import java.util.concurrent.CountDownLatch;
 
 @Entity
 @Table(name = "users")
@@ -45,17 +47,17 @@ public class User {
 
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(
-        name = "user_roles",
-        joinColumns = @JoinColumn(name = "user_id"),
-        inverseJoinColumns = @JoinColumn(name = "role_id")
+            name = "user_roles",
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "role_id")
     )
     private Set<Role> roles;
 
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(
-        name = "user_permissions",
-        joinColumns = @JoinColumn(name = "user_id"),
-        inverseJoinColumns = @JoinColumn(name = "permission_id")
+            name = "user_permissions",
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "permission_id")
     )
     private Set<Permission> permissions;
 
@@ -75,18 +77,40 @@ public class User {
             throw new RuntimeException(e);
         }
     }
-    public String createJWT() {
-        StringBuilder roleStr = new StringBuilder();
-        for (Role role : this.roles) {
-            roleStr.append(role.getName());
-            roleStr.append(",");
-        }
-        roleStr.deleteCharAt(roleStr.length() - 1);
-        return JwtTokenProvider.createToken(this.username, roleStr.toString());
+
+    public String createJWT() throws InterruptedException {
+        String permissionsAll = getAllPermissions();
+        return JwtTokenProvider.createToken(this.username, permissionsAll);
+    }
+
+    public String getAllPermissions() throws InterruptedException {
+        CountDownLatch latch = new CountDownLatch(2);
+        Set<String> rolePermissions = new HashSet<>();
+        Set<String> userPermissions = new HashSet<>();
+
+        new Thread(() -> {
+            try {
+                this.getRoles().forEach(role -> role.getPermissions().forEach(permission -> rolePermissions.add(permission.getName())));
+            } finally {
+                latch.countDown();
+            }
+        }).start();
+
+        new Thread(() -> {
+            try {
+                this.getPermissions().forEach(permission -> userPermissions.add(permission.getName()));
+            } finally {
+                latch.countDown();
+            }
+        }).start();
+
+        latch.await();
+        userPermissions.addAll(rolePermissions);
+        return String.join(",", userPermissions);
     }
 
     public void verifyPassword(User userFromDb) throws NoSuchAlgorithmException {
-        if (!PasswordUtil.verifyPassword(this.getPassword(), userFromDb.getPassword(), userFromDb.getSalt())){
+        if (!PasswordUtil.verifyPassword(this.getPassword(), userFromDb.getPassword(), userFromDb.getSalt())) {
             throw new RuntimeException("密码错误");
         }
     }
