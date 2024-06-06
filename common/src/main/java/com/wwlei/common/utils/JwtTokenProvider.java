@@ -2,7 +2,6 @@ package com.wwlei.common.utils;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
-import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.security.Keys;
 
 import java.security.Key;
@@ -14,7 +13,7 @@ public final class JwtTokenProvider {
 
     private JwtTokenProvider() {}
 
-    private final static Key KEY = Keys.secretKeyFor(SignatureAlgorithm.HS256);
+    private final static Key KEY = Keys.hmacShaKeyFor("SUfzXjkMOLzXM94WKh5At4-oBq-a1FBJFC3J-B1qQ1E=".getBytes());
 
     public static String createToken(String username, String role) {
         Map<String, Object> claims = new HashMap<>();
