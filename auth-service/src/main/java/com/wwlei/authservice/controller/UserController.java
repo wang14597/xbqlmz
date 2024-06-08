@@ -39,4 +39,9 @@ public final class UserController {
     public ApiResponse<?> login(@RequestBody User user) throws NoSuchAlgorithmException, InterruptedException {
         return ApiResponse.success(userService.login(user));
     }
+
+    @PostMapping("/registry")
+    public ApiResponse<?> registry(@RequestBody User user) {
+        return ApiResponse.success(userService.registry(user));
+    }
 }
