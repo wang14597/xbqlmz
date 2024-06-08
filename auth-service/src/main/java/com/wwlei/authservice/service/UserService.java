@@ -22,7 +22,6 @@ public class UserService {
      * @param id 用户的唯一标识符。
      * @return 用户聚合体，包含有关用户的详细信息。
      */
-    @Transactional(readOnly = true)
     public User getUserAggregate(Long id) {
         return userAggregateRepo.findByUserId(id);
     }
@@ -49,7 +48,7 @@ public class UserService {
         user.verifyPassword(userFromDb);
         return userFromDb.createJWT();
     }
-
+    @Transactional
     public User registry(User user) {
         User byUsername = userAggregateRepo.findByUsername(user.getUsername());
         if (byUsername != null) {
